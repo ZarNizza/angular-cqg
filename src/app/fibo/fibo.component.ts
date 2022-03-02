@@ -1,18 +1,35 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-fibo',
   templateUrl: './fibo.component.html',
   styleUrls: ['./fibo.component.scss'],
 })
-export class FiboComponent {
+export class FiboComponent implements OnInit {
   @Input() fiboTitle!: string;
   fiboNumber!: number;
-  output!: number;
+  fiboOutput!: number;
+  webWorker!: Worker;
+
+  ngOnInit() {
+    if (typeof Worker !== 'undefined') {
+      this.webWorker = new Worker('./webWorker');
+      this.webWorker.onmessage = ({ data }) => {
+        this.fiboOutput = data;
+      };
+      this.webWorker.onerror = (err) => {
+        console.log(
+          '! WebWorker Error ! ',
+          `${err.filename}:${err.lineno} ${err.message}`
+        );
+      };
+    }
+  }
 
   calc_Fibo() {
     console.log('fiboNumber=', this.fiboNumber);
-    this.output = fibonacci(this.fiboNumber);
+    this.webWorker.postMessage(this.fiboNumber);
+    // this.output = fibonacci(this.fiboNumber);
   }
 }
 
