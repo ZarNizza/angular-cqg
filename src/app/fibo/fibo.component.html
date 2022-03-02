@@ -1,0 +1,12 @@
+<div class="flex_col">
+  <p>- fibo {{ fiboTitle }} -</p>
+  <div class="flex_row">
+    <input
+      type="number"
+      [(ngModel)]="fiboNumber"
+      placeholder="Enter any number"
+    />
+    <button (click)="calc_Fibo()">FiboCalc</button>
+  </div>
+  <div>- {{ output }} -</div>
+</div>
