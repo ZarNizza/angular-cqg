@@ -13,9 +13,11 @@ export class FiboComponent implements OnInit {
 
   ngOnInit() {
     if (typeof Worker !== 'undefined') {
-      this.webWorker = new Worker('./webWorker');
-      this.webWorker.onmessage = ({ data }) => {
-        this.fiboOutput = data;
+      this.webWorker = new Worker(
+        new URL('./../web-worker.worker', import.meta.url)
+      );
+      this.webWorker.onmessage = (evt: MessageEvent) => {
+        this.fiboOutput = evt.data;
       };
       this.webWorker.onerror = (err) => {
         console.log(
@@ -27,14 +29,11 @@ export class FiboComponent implements OnInit {
   }
 
   calc_Fibo() {
-    console.log('fiboNumber=', this.fiboNumber);
     this.webWorker.postMessage(this.fiboNumber);
-    // this.output = fibonacci(this.fiboNumber);
   }
 }
 
 function fibonacci(num: number): number {
-  console.log('fibo ', num);
   if (num == 1 || num == 2) {
     return 1;
   }

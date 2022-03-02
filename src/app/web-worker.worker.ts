@@ -4,8 +4,7 @@ function fibonacci(num: number): number {
   }
   return fibonacci(num - 1) + fibonacci(num - 2);
 }
-self.addEventListener('message', (evt) => {
+self.addEventListener('message', (evt: MessageEvent) => {
   const num = evt.data;
-  console.log('inside webWorker - num=', num);
   postMessage(fibonacci(num));
 });
