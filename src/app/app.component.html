@@ -4,6 +4,13 @@
     <app-fibo fiboTitle="{{ title }}"></app-fibo>
     <app-tabloid></app-tabloid>
   </div>
+  <ag-grid-angular
+    style="width: 500px; height: 500px"
+    class="ag-theme-alpine"
+    [rowData]="rowData"
+    [columnDefs]="columnDefs"
+  >
+  </ag-grid-angular>
   <footer>
     <div>Gogogo</div>
   </footer>
