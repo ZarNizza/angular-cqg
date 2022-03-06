@@ -17,7 +17,6 @@ if (typeof Worker !== 'undefined') {
   contractsServer.onmessage = (evt: MessageEvent) => {
     contractsArr = evt.data;
     contractsArr.forEach((c: Contract) => {
-      console.log('+++ c=', c);
       if ('removed' in c) {
         delete cRef[c.id];
         cLengthRef--;
