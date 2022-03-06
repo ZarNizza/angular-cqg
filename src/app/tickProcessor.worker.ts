@@ -1,10 +1,13 @@
 import { Contract, ContractBook, Quote } from './types';
-
 let quotesServer!: Worker;
 let quotesArr!: any;
 let contractsServer!: Worker;
 let contractsArr!: any;
+// let cRef!: ContractBook;
+
 let cRef!: ContractBook;
+
+cRef['z'] = { n: '-', q: [{ p: 0, v: 0 }], pt: 0, cp: 0, wma: { p: 0, v: 0 } };
 let cLengthRef!: number;
 cLengthRef = 0;
 console.log('\n!!!!!! ticker - initial cRef', cRef);
@@ -16,14 +19,17 @@ if (typeof Worker !== 'undefined') {
   );
   contractsServer.onmessage = (evt: MessageEvent) => {
     // console.log('*********** ticker - receive Contracts', evt.data);
-    console.log('*********** Contracts cRef=', cRef);
+    // console.log('*********** Contracts cRef=', cRef);
     contractsArr = evt.data;
     contractsArr.forEach((c: Contract) => {
+      console.log('+++ c=', c);
       if ('removed' in c) {
         delete cRef[c.id];
         cLengthRef--;
       } else {
+        console.log('+++++++ c.id - !cRef[c.id]', c.id, !cRef[c.id]);
         if (!cRef[c.id]) {
+          console.log('+++++++++ inside!');
           cRef[c.id] = {
             n: c.name,
             q: [{ p: 0, v: 0 }],
@@ -35,6 +41,7 @@ if (typeof Worker !== 'undefined') {
         }
       }
     });
+    console.log('======= final Contracts cRef', cRef, '\n\n\n\n');
   };
   contractsServer.onerror = (err) => {
     console.log(
@@ -46,7 +53,7 @@ if (typeof Worker !== 'undefined') {
   // quotes
   quotesServer = new Worker(new URL('./quotesServer.worker', import.meta.url));
   quotesServer.onmessage = (evt: MessageEvent) => {
-    // console.log('------ ticker - receive Quotes', evt.data);
+    console.log('------ ticker - receive Quotes', evt.data);
     quotesArr = evt.data;
     quotesArr.forEach((q: Quote) => {
       const i = q.contractId;
@@ -83,7 +90,7 @@ if (typeof Worker !== 'undefined') {
       cRef[i].wma.v = wmaV;
       cRef[i].cp = q.quote.p;
     });
-
+    console.log('////////////QUOTES - final cRef to send:', cRef);
     postMessage(cRef);
   };
 

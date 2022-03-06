@@ -1,9 +1,12 @@
 <div class="page">
   <app-header title="{{ title }}"></app-header>
   <div class="content" role="main">
+    <button (click)="hideWMAhandler()" type="button">
+      Style {{ hideWMAflag }}
+    </button>
     <ag-grid-angular
       (gridReady)="onGridReady($event)"
-      style="width: 700px; height: 500px"
+      style="width: 500px; height: 500px"
       class="ag-theme-alpine"
       [rowData]="rowData"
       [columnDefs]="columnDefs"
