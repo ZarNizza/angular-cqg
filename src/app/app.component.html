@@ -1,16 +1,16 @@
 <div class="page">
   <app-header title="{{ title }}"></app-header>
   <div class="content" role="main">
-    <app-fibo fiboTitle="{{ title }}"></app-fibo>
-    <app-tabloid></app-tabloid>
+    <ag-grid-angular
+      (gridReady)="onGridReady($event)"
+      style="width: 700px; height: 500px"
+      class="ag-theme-alpine"
+      [rowData]="rowData"
+      [columnDefs]="columnDefs"
+      [suppressScrollOnNewData]="true"
+    >
+    </ag-grid-angular>
   </div>
-  <ag-grid-angular
-    style="width: 500px; height: 500px"
-    class="ag-theme-alpine"
-    [rowData]="rowData"
-    [columnDefs]="columnDefs"
-  >
-  </ag-grid-angular>
   <footer>
     <div>Gogogo</div>
   </footer>

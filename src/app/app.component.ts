@@ -12,23 +12,24 @@ import type { ContractBook } from './types';
 export class AppComponent implements OnInit {
   title = 'Q-q!';
   columnDefs: ColDef[] = [
-    { field: 'make' },
-    { field: 'model' },
-    { field: 'price' },
+    { field: 'name' },
+    {
+      field: 'price',
+      type: 'rightAligned',
+    },
+    { field: 'wma', type: 'rightAligned' },
   ];
-  rowData = [
-    { make: 'Toyota', model: 'Celica', price: 35000 },
-    { make: 'Ford', model: 'Mondeo', price: 32000 },
-    { make: 'Porsche', model: 'Boxter', price: 72000 },
-  ];
+  rowData = [{ name: 'ABC', price: 0, wma: 0 }];
+  gridRef!: GridReadyEvent | null;
+  @Output() onGridReady = (gridReadyEvent: any) =>
+    (this.gridRef = gridReadyEvent);
 
   ngOnInit(): void {
     let cRef!: ContractBook;
-    let gridRef!: GridReadyEvent | null;
     let cLengthRef!: number;
     cRef = {};
     cLengthRef = 0;
-    gridRef = null;
+    this.gridRef = null;
 
     subscribeToContracts((contractsArr) => {
       contractsArr.forEach((c) => {
@@ -49,9 +50,8 @@ export class AppComponent implements OnInit {
         }
       });
     });
-    // console.log('Contract ticker', cRef);
     subscribeToQuotes((quotesArr) => {
-      if (gridRef === null) return;
+      if (this.gridRef === null) return;
 
       quotesArr.forEach((q) => {
         const i = q.contractId;
@@ -88,7 +88,7 @@ export class AppComponent implements OnInit {
         cRef[i].wma.v = wmaV;
         cRef[i].cp = q.quote.p;
       });
-      gridRef.api.setRowData(
+      this.gridRef.api.setRowData(
         Object.entries(cRef).map((c) => {
           return {
             name: c[1].n,
@@ -101,6 +101,5 @@ export class AppComponent implements OnInit {
         })
       );
     });
-    console.log('Quotes ticker', gridRef);
   }
 }
