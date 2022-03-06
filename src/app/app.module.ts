@@ -4,17 +4,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AgGridModule } from 'ag-grid-angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { TabloidComponent } from './tabloid/tabloid.component';
 import { HeaderComponent } from './header/header.component';
 import { FiboComponent } from './fibo/fibo.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    TabloidComponent,
-    HeaderComponent,
-    FiboComponent,
-  ],
+  declarations: [AppComponent, HeaderComponent, FiboComponent],
   imports: [
     BrowserModule,
     FormsModule,

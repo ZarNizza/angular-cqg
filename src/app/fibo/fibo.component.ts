@@ -6,7 +6,6 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./fibo.component.scss'],
 })
 export class FiboComponent implements OnInit {
-  @Input() fiboTitle!: string;
   fiboNumber!: number;
   fiboOutput!: number;
   webWorker!: Worker;
