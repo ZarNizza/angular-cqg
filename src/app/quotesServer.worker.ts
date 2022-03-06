@@ -1,21 +1,24 @@
-/**
+/** quotesServer web-worker
  * Emulates a websocket subscription, executes the callback in random intervals
  *  and feeds quotes data
  */
+
 import type { QuoteList } from './types';
 
-const maxContractsNumber = 10000; // max number of known Contracts
-const parcelMaxQuotes = 1000; // max number of Quotes in one parcel, up to 10000+
+const maxContractsNumber = 10; // max number of known Contracts
+const parcelMaxQuotes = 10; // max number of Quotes in one parcel, up to 10000+
 const maxQuotesFlowDelay = 100; // max delay between QuotesParcels, ms
 
-export function subscribeToQuotes(fn: (data: QuoteList) => void) {
+sendQuotes();
+
+export function sendQuotes() {
   let delay;
   let timeoutId: NodeJS.Timeout;
 
   function handleTimeout() {
     delay = Math.random() * maxQuotesFlowDelay;
     const data = getRandomQuotes();
-    fn(data);
+    postMessage(data);
     timeoutId = setTimeout(handleTimeout, delay);
   }
 

@@ -5,10 +5,9 @@ import { AgGridModule } from 'ag-grid-angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
-import { FiboComponent } from './fibo/fibo.component';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, FiboComponent],
+  declarations: [AppComponent, HeaderComponent],
   imports: [
     BrowserModule,
     FormsModule,

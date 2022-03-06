@@ -1,21 +1,23 @@
-/**
+/** contractsServer web-worker
  * Emulates a websocket subscription, executes the callback in random intervals
  *  and feeds contracts data
  */
 import type { Contract, ContractList, ContractToRemove } from './types';
 
-const maxContractsNumber = 10000; // max number of known Contracts
-const parcelMaxContracts = 1000; // max number of Contracts in one parcel, up to 10000+
+const maxContractsNumber = 10; // max number of known Contracts
+const parcelMaxContracts = 10; // max number of Contracts in one parcel, up to 10000+
 const maxContractsFlowDelay = 2000; // max delay between ContractsParcels, ms
 
-export function subscribeToContracts(fn: (data: ContractList) => void) {
+sendContracts();
+
+export function sendContracts() {
   let delay: number;
   let timeoutId: NodeJS.Timeout;
 
   function handleTimeout() {
     delay = Math.random() * maxContractsFlowDelay;
     const data = getRandomContracts();
-    fn(data);
+    postMessage(data);
     timeoutId = setTimeout(handleTimeout, delay);
   }
 
