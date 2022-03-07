@@ -1,13 +1,12 @@
 /** quotesServer web-worker
- * Emulates a websocket subscription, executes the callback in random intervals
- *  and feeds quotes data
+ * Emulates a websocket subscription, generate and feeds quotes data in random intervals
  */
 
 import type { QuoteList } from './types';
 
-const maxContractsNumber = 500; // max number of known Contracts
+const maxContractsNumber = 100; // max number of known Contracts
 const parcelMaxQuotes = 100; // max number of Quotes in one parcel, up to 10000+
-const maxQuotesFlowDelay = 100; // max delay between QuotesParcels, ms
+const maxQuotesFlowDelay = 500; // max delay between QuotesParcels, ms
 
 sendQuotes();
 
