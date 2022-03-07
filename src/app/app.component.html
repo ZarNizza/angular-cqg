@@ -1,15 +1,18 @@
 <div class="page">
   <app-header title="{{ title }}"></app-header>
   <div class="content" role="main">
-    <button
-      (click)="hideWMAhandler()"
-      type="button"
-      [ngSwitch]="hideWMAflag"
-      class="wmaButton"
-    >
-      <span *ngSwitchCase="true">Hide WMA</span>
-      <span *ngSwitchCase="false">Show WMA</span>
-    </button>
+    <div class="right">
+      <span>WMA - weighted moving average price</span>
+      <button
+        (click)="hideWMAhandler()"
+        type="button"
+        [ngSwitch]="hideWMAflag"
+        class="wmaButton"
+      >
+        <span *ngSwitchCase="true">Hide WMA</span>
+        <span *ngSwitchCase="false">Show WMA</span>
+      </button>
+    </div>
     <ag-grid-angular
       (gridReady)="onGridReady($event)"
       style="width: 400px; height: 500px"
