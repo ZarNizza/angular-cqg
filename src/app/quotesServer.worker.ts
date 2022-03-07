@@ -4,9 +4,9 @@
 
 import type { QuoteList } from './types';
 
-const maxContractsNumber = 100; // max number of known Contracts
+const maxContractsNumber = 1000; // max number of known Contracts
 const parcelMaxQuotes = 100; // max number of Quotes in one parcel, up to 10000+
-const maxQuotesFlowDelay = 500; // max delay between QuotesParcels, ms
+const maxQuotesFlowDelay = 100; // max delay between QuotesParcels, ms
 
 sendQuotes();
 
