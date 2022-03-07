@@ -80,7 +80,19 @@ if (typeof Worker !== 'undefined') {
       cRef[i].wma.v = wmaV;
       cRef[i].cp = q.quote.p;
     });
-    postMessage(cRef);
+    // console.log('\n\ntick - cRef:', cRef);
+
+    const cRow = Object.entries(cRef as ContractBook).map((c) => {
+      return {
+        name: c[1].n,
+        price: c[1].cp.toFixed(4),
+        wma:
+          c[1].cp > 0 ? ((c[1].wma.p * 100) / c[1].cp).toFixed(2) + '%' : '0',
+      };
+    });
+    // console.log('tick - cRow:', cRow);
+
+    postMessage(cRow);
   };
 
   quotesServer.onerror = (err) => {

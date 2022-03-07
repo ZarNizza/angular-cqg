@@ -66,18 +66,7 @@ export class AppComponent implements OnInit {
         new URL('./tickProcessor.worker', import.meta.url)
       );
       this.tickProcessor.onmessage = (evt: MessageEvent) => {
-        this.gridRef?.api.setRowData(
-          Object.entries(evt.data as ContractBook).map((c) => {
-            return {
-              name: c[1].n,
-              price: c[1].cp.toFixed(4),
-              wma:
-                c[1].cp > 0
-                  ? ((c[1].wma.p * 100) / c[1].cp).toFixed(2) + '%'
-                  : '0',
-            };
-          })
-        );
+        this.gridRef?.api.setRowData(evt.data);
         return;
       };
       return;
