@@ -1,12 +1,18 @@
 <div class="page">
   <app-header title="{{ title }}"></app-header>
   <div class="content" role="main">
-    <button (click)="hideWMAhandler()" type="button">
-      Style {{ hideWMAflag }}
+    <button
+      (click)="hideWMAhandler()"
+      type="button"
+      [ngSwitch]="hideWMAflag"
+      class="wmaButton"
+    >
+      <span *ngSwitchCase="true">Hide WMA</span>
+      <span *ngSwitchCase="false">Show WMA</span>
     </button>
     <ag-grid-angular
       (gridReady)="onGridReady($event)"
-      style="width: 500px; height: 500px"
+      style="width: 400px; height: 500px"
       class="ag-theme-alpine"
       [rowData]="rowData"
       [columnDefs]="columnDefs"
@@ -15,7 +21,7 @@
     </ag-grid-angular>
   </div>
   <footer>
-    <div>Gogogo</div>
+    <div>Samara</div>
   </footer>
 
   <router-outlet></router-outlet>

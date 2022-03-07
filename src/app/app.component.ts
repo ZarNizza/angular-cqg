@@ -1,10 +1,5 @@
 import { Component, OnInit, Output } from '@angular/core';
-import {
-  ColDef,
-  GridApi,
-  GridReadyEvent,
-  RefreshCellsParams,
-} from 'ag-grid-community';
+import { ColDef, ColumnApi, GridApi, GridReadyEvent } from 'ag-grid-community';
 import type { ContractBook } from './types';
 
 @Component({
@@ -15,20 +10,22 @@ import type { ContractBook } from './types';
 export class AppComponent implements OnInit {
   tickProcessor!: Worker;
 
-  gridApi!: GridApi;
   gridRef!: GridReadyEvent | null;
+  gridApi!: GridApi;
+  columnApi!: ColumnApi;
   onGridReady = (gridReadyEvent: any) => {
     this.gridRef = gridReadyEvent;
     this.gridApi = gridReadyEvent.api;
+    this.columnApi = gridReadyEvent.columnApi;
   };
 
-  title = 'Q-q!';
+  title = 'CQG-Angular';
 
-  hideWMAflag = false;
+  hideWMAflag = true;
   hideWMAhandler() {
     this.hideWMAflag = !this.hideWMAflag;
-    this.gridApi.setColumnDefs(this.columnDefs);
-    // this.gridApi.refreshCells();
+    this.columnApi.setColumnVisible('wma', this.hideWMAflag);
+    this.gridApi.sizeColumnsToFit();
   }
   columnDefs: ColDef[] = [
     {
@@ -41,19 +38,19 @@ export class AppComponent implements OnInit {
     {
       field: 'price',
       type: 'rightAligned',
-      width: 150,
+      width: 100,
       minWidth: 100,
       maxWidth: 300,
       resizable: true,
+      suppressSizeToFit: true,
     },
     {
       field: 'wma',
       type: 'rightAligned',
-      width: 150,
-      minWidth: 100,
+      width: 100,
+      minWidth: 50,
       maxWidth: 300,
       resizable: true,
-      hide: this.hideWMAflag,
     },
   ];
   rowData = [{ name: 'ABC', price: 0, wma: 0 }];
@@ -69,9 +66,6 @@ export class AppComponent implements OnInit {
         new URL('./tickProcessor.worker', import.meta.url)
       );
       this.tickProcessor.onmessage = (evt: MessageEvent) => {
-        // if (typeof this.gridRef === 'undefined' || this.gridRef === null) {
-        //   return;
-        // } else {
         this.gridRef?.api.setRowData(
           Object.entries(evt.data as ContractBook).map((c) => {
             return {
@@ -85,7 +79,6 @@ export class AppComponent implements OnInit {
           })
         );
         return;
-        // }
       };
       return;
     }
