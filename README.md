@@ -6,7 +6,7 @@
 
  - tickProcessor web-worker, also in background task, receive contracts from contractsServer, update ContractBook according received data (append/delete items).
 
- tickProcessor receive quotes from quotesServer, calculate each quote WMA current value and allocate it all in ContractBook object.
+ TickProcessor receive quotes from quotesServer, calculate each quote WMA current value and allocate it all in ContractBook object.
 
  After all quotes processing in parcel, tickProcessor convert actual ContractBook data to array and post it to AppComponent in high performance datagrid.
 
