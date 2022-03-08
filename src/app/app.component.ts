@@ -1,6 +1,5 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { ColDef, ColumnApi, GridApi, GridReadyEvent } from 'ag-grid-community';
-import type { ContractBook } from './types';
 
 @Component({
   selector: 'app-root',
