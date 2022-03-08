@@ -5,7 +5,7 @@
 import type { Contract, ContractList, ContractToRemove } from './types';
 
 let maxContractsNumber = 1000; // max number of known Contracts
-const parcelMaxContracts = 10; // max number of Contracts in one parcel, up to 10000+
+const parcelMaxContracts = 100; // max number of Contracts in one parcel, up to 10000+
 const maxContractsFlowDelay = 2000; // max delay between ContractsParcels, ms
 
 sendContracts();
