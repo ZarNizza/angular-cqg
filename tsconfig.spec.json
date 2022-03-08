@@ -3,12 +3,18 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/spec",
-    "module": "commonjs",
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "lib": [
+      "ES2020","DOM"
+    ],
+    "target": "ES2020",
     "types": [
       "jest", "node"
     ],
     "allowJs": true,
-    "emitDecoratorMetadata": true
+    "emitDecoratorMetadata": true,
+    "suppressImplicitAnyIndexErrors": true
   },
   "esModuleInterop": true,
   "files": [
