@@ -6,13 +6,13 @@
 
  - tickProcessor web-worker, also in background task, receive contracts from contractsServer, update ContractBook according received data (append/delete items).
 
- TickProcessor receive quotes from quotesServer, calculate each quote WMA current value and allocate it all in ContractBook object.
+ TickProcessor receive quotes from quotesServer, calculate each quote WMA current value and allocate it all in ContractBook.
 
  After all quotes processing in parcel, tickProcessor convert actual ContractBook data to array and post it to AppComponent in high performance datagrid.
 
 
 
- WMA = weighted moving average price for last 1000 values. Represented as ratio to the current price (%).
+ WMA = weighted moving average price, in this case calculated for last 1000 values. Represented as ratio to the current price (%).
 
  Performance can be further increased by use SharedArrays for ContractBook.
 
