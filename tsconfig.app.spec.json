@@ -2,7 +2,7 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "outDir": "./out-tsc/worker",
+    "outDir": "./out-tsc/app",
     "allowSyntheticDefaultImports": true,
     "suppressImplicitAnyIndexErrors": true,
     // "module": "CommonJS",
@@ -17,11 +17,13 @@
       "node",
       "jest"
     ],
-    "typeRoots": [
-      "node_modules/@types"
-    ]
   },
+  "files": [
+    "src/main.ts",
+    "src/polyfills.ts"
+  ],
   "include": [
+    "src/**/*.d.ts",
     "src/**/*.worker.ts"
   ]
 }

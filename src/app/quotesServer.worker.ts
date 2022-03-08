@@ -1,11 +1,11 @@
 /** quotesServer web-worker
- * Emulates a websocket subscription, generate and feeds quotes data in random intervals
+ * Emulates a websocket subscription, generate and send quotes data to tickProcessor in random intervals
  */
 
 import type { QuoteList } from './types';
 
 const maxContractsNumber = 1000; // max number of known Contracts
-const parcelMaxQuotes = 100; // max number of Quotes in one parcel, up to 10000+
+const parcelMaxQuotes = 10; // max number of Quotes in one parcel, up to 10000+
 const maxQuotesFlowDelay = 100; // max delay between QuotesParcels, ms
 
 sendQuotes();
@@ -30,10 +30,12 @@ function getRandomQuotes(): QuoteList {
   const elementsCount = Math.ceil(Math.random() * parcelMaxQuotes);
   return new Array(elementsCount).fill(null).map(() => {
     const rnd = Math.ceil(Math.random() * maxContractsNumber).toString();
+
     let rndPrice =
       Number(rnd) +
       (Math.random() * maxContractsNumber) / 10 -
       maxContractsNumber / 20;
+
     if (rndPrice < 0) {
       rndPrice = 0;
     }

@@ -3,16 +3,20 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/app",
-    "types": ["node",
-      "jest"],
-    "typeRoots": ["node_modules/@types"],
-    "module": "CommonJS",
+    "allowSyntheticDefaultImports": true,
+    "suppressImplicitAnyIndexErrors": true,
+    // "module": "CommonJS",
+    "module": "ES2020",
     "moduleResolution": "Node",
-    "lib": [
-      "ES2020", "DOM"
-    ],
     "target": "ES2020",
-    "suppressImplicitAnyIndexErrors": true
+    "lib": [
+      "ES2020",
+      "DOM"
+    ],
+    "types": [
+      "node",
+      "jest"
+    ],
   },
   "files": [
     "src/main.ts",

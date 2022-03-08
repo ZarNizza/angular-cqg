@@ -1,3 +1,11 @@
+/** tickProcessor web-worker
+ * Receive contracts from contractsServer, update ContractBook according received data (append/delete items).
+ * Receive quotes from quotesServer, calculate each quote WMA current value and allocate it all in ContractBook object.
+ * After processing every quotes parcel convert actual data to array and post it to AppComponent in high performance datagrid.
+
+ * WMA = weighted moving average price for last 1000 values.
+ */
+
 import { Contract, ContractBook, Quote } from './types';
 let quotesServer!: Worker;
 let quotesArr!: any;
