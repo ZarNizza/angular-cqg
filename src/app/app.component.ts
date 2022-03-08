@@ -22,6 +22,7 @@ export class AppComponent implements OnInit {
   title = 'CQG-Angular';
 
   hideWMAflag = true;
+  agGridAngular: any;
   hideWMAhandler() {
     this.hideWMAflag = !this.hideWMAflag;
     this.columnApi.setColumnVisible('wma', this.hideWMAflag);
