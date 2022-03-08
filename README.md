@@ -1,4 +1,4 @@
-#This is private tutotial playground, not for public use.
+#This is private tutorial playground, not for public use.
 
  - contractsServer web-worker - emulates a websocket subscription in background task, generate and send random size contracts data packets to tickProcessor in random intervals.
 
