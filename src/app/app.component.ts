@@ -30,8 +30,8 @@ export class AppComponent implements OnInit {
   columnDefs: ColDef[] = [
     {
       field: 'name',
-      width: 150,
-      minWidth: 100,
+      width: 100,
+      minWidth: 80,
       maxWidth: 300,
       resizable: true,
     },
@@ -47,8 +47,8 @@ export class AppComponent implements OnInit {
     {
       field: 'wma',
       type: 'rightAligned',
-      width: 100,
-      minWidth: 50,
+      width: 90,
+      minWidth: 90,
       maxWidth: 300,
       resizable: true,
     },
